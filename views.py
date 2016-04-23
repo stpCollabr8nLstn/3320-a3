@@ -1,12 +1,12 @@
-import base64
 import flask
+import flask_socketio as sio
+import re
+import urllib
+from init import app, db, socketio
 import models
+import io
+import base64
 import os
-import jinja2
-from sqlalchemy.orm import joinedload
-from init import app, db
-from sqlalchemy import or_
-from sqlalchemy import desc
 
 
 @app.before_request
@@ -50,7 +50,18 @@ def edit_user(uid):
 @app.route('/create_room', methods=['POST'])
 def create_room():
     topic = flask.request.form['topic']
-    return flask.render_template('room.html', topic=topic)
+    room = models.Room()
+    room.topic = topic
+    db.session.add(room)
+    db.session.commit()
+    r_id = room.id
+    return flask.redirect(flask.url_for('room_view', r_id=r_id), code=303)
+
+
+@app.route('/room/<int:r_id>')
+def room_view(r_id):
+    room = models.Room.query.filter_by(id=r_id).first()
+    return flask.render_template('room.html', room=room)
 
 
 @app.errorhandler(404)

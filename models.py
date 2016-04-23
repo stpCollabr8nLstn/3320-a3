@@ -1,5 +1,4 @@
 import hashlib
-import datetime
 from init import app, db
 
 
@@ -23,6 +22,11 @@ class User(db.Model):
             'grav_hash': self.grav_hash,
             'name': self.name
         }
+
+
+class Room(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    topic = db.Column(db.String(20))
 
 
 db.create_all(app=app)
