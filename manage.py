@@ -26,7 +26,7 @@ import sys
 from flask_script import Manager
 
 # TODO Change this to import from your main application file
-import myapp as app_module
+import a3 as app_module
 app = app_module.app
 
 

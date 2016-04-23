@@ -13,7 +13,7 @@
     {% endif %}
 
     <div class="login-page pure-u-1 pure-u-md-1">
-        <form method="POST" action="/login" class="pure-form pure-form-stacked pure-u-1 pure-u-md-1-3">
+        <form method="POST" action="{{ url_for("login") }}" class="pure-form pure-form-stacked pure-u-1 pure-u-md-1-3">
             <h2>Returning Users</h2>
             <input type="hidden" name="url" value="{{ request.args.url }}">
 
@@ -26,7 +26,7 @@
             <button type="submit" class="pure-button pure-button-primary">Log In</button>
         </form>
 
-        <form method="POST" action="/create_user" class="pure-form pure-form-stacked pure-u-1 pure-u-md-1-3">
+        <form method="POST" action="{{ url_for("create_user") }}" class="pure-form pure-form-stacked pure-u-1 pure-u-md-1-3">
             <h2>New Users</h2>
             <input type="hidden" name="url" value="{{ request.args.url }}">
 
@@ -36,11 +36,14 @@
             <label for="create-username">Username</label>
               <input type="text" name="create-username" id="create-username" maxlength="20">
 
+            <label for="display">Display Name</label>
+            <input type="text" name="display" id="display">
+
             <label for="create-password">Password</label>
               <input type="password" name="create-password" id="create-password">
 
             <label for="create-confirm">Confirm Password</label>
-              <input type="password" name="confirm" id="create-confirm">
+              <input type="password" name="create-confirm" id="create-confirm">
 
             <button type="submit" class="pure-button pure-button-primary">Create Account</button>
         </form>

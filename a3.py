@@ -1,6 +1,6 @@
 from init import app
 
-import views, api
+import views, auth, api
 
 
 if __name__ == '__main__':
