@@ -23,11 +23,14 @@
   </script>
 </head>
 <body class="pure-g">
-<h1 class="pure-u-1">ChatrBox</h1>
+<div class="pure-u-1-5 sidebar"></div>
+<h1 class="pure-u-3-5">ChatrBox</h1>
+<div class="pure-u-3-5 banner-img"><img src="/static/banner.png"></div>
+
 <div id="content" class="pure-u-1">{% block content %}{% endblock %}</div>
 <div id="footer" class="pure-u-1">
     {% block footer %}
-    &copy; Copyright 2016 by Adriana Rios.
+    <br> &copy; Copyright 2016 by Adriana Rios.
     {% endblock %}
 </div>
 </body>

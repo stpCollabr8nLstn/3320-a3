@@ -1,3 +1,59 @@
 html {
-    font-size: 16pt;
+    font-size: 12pt;
+}
+
+#content {
+    padding-left: 25pt;
+}
+
+/* make the input a _flex-box_, so we can stretch */
+.chat .chat-input {
+  display: flex;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+}
+/* don't stretch the label */
+.chat .chat-input label {
+  flex-grow: 0;
+}
+/* stretch the input */
+.chat .chat-input input {
+  flex-grow: 1;
+  margin: 0 3pt;
+}
+/* don't stretch the button */
+.chat .chat-input button {
+  flex-grow: 0;
+}
+#messages {
+  padding: 0;
+  height: 25em;
+  overflow-y: scroll;
+}
+#messages li {
+  display: block;
+  padding-left: 0;
+  font-family: "Open Sans", sans-serif;
+  border: solid 1px;
+  border-radius: 1ex;
+  margin-bottom: 1ex;
+  padding: 1ex;
+}
+#messages li.sent {
+  float: right;
+  clear: both;
+  max-width: 60%;
+  background-color: #b2e8eb;
+}
+#messages li.received {
+    float: left;
+    clear: both;
+    max-width: 60%;
+    background-color: #ebc781;
+}
+
+.chat {
+    border: 3pt solid rebeccapurple;
+    border-radius: 5px;
+    padding: 5pt;
 }
