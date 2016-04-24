@@ -2,18 +2,26 @@
 {% block title %}{{ room.topic }}{% endblock %}
 {% block content %}
 <h1>{{ room.topic }}</h1>
-  <div class="chat pure-u-1-3">
-  <ul id="messages"></ul> {# where messages go! #}
-    {# and a form to send them #}
-  <form class="pure-form chat-input" action="" id="chat">
-      <label for="m">Message:</label>
-      <input type="text" id="m" name="m" autocomplete="off">
-      <button class="pure-button pure-button-primary">Send</button>
-  </form>
-  </div>
-
+    {% if g.user %}
+      <div class="chat pure-u-1 pure-u-md-1-3">
+        <ul id="messages"></ul> {# where messages go! #}
+          {# and a form to send them #}
+        <form class="pure-form chat-input" action="" id="chat">
+          <input type="hidden" id="uname" name="username" value="{{ g.user.username }}">
+          <label for="m">Message:</label>
+          <input type="text" id="m" name="m" autocomplete="off">
+          <button class="pure-button pure-button-primary">Send</button>
+        </form>
+      </div>
+      <div class="chat-users pure-u-1 pure-u-md-1-3">
+        Users:
+        <ul id="userlist"></ul> {# where users go #}
+      </div>
+    {% else %}
+       <h2>Login to chat!</h2>
+    {% endif %}
   {# import socket.io client library #}
   <script src="https://cdn.jsdelivr.net/socket.io-client/1.3.2/socket.io.min.js"></script>
-  {# import our JavaScript #}
+  {# import JavaScript #}
   <script src="{{ url_for('static', filename='chat.js') }}" async></script>
 {% endblock %}

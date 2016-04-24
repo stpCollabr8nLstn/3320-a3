@@ -42,3 +42,8 @@ socket.on('message', function(msg) {
     $('#messages').append($('<li>').addClass('received').text(msg));
     scrollChat();
 });
+
+$(window).load(function() {
+    var u_name = $('#uname').val();
+    $('#userlist').append($('<li>').addClass('user fa fa-user').text('     ' + u_name));
+});

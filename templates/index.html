@@ -1,18 +1,29 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
+    <p>ChatrBox is a social chat tool to connect you to other users who share your interests.</p>
     {% if g.user %}
-    <div class="login-page pure-u-1 pure-u-md-1">
-        <form action="{{ url_for('create_room') }}" method="post" class="pure-form pure-form-stacked">
-            <fieldset>
-                <input type="hidden" name="_csrf_token" value="{{ session.csrf_token }}">
+      <div class="login-page pure-u-1 pure-u-md-1">
+      <p>Enter a topic of interest to get started.</p>
+          <form action="{{ url_for('create_room') }}" method="post" class="pure-form">
+              <fieldset>
+                  <input type="hidden" name="_csrf_token" value="{{ session.csrf_token }}">
 
-                <label for="topic">Topic: </label>
-                <input id="topic" name="topic" type="text" placeholder="What are you interested in?">
+                  <label for="topic">Topic: </label>
+                  <input id="topic" name="topic" type="text" required>
 
-                <button type="submit" class="pure-button pure-button-primary">Update</button>
-            </fieldset>
-        </form>
-    </div>
+                  <button type="submit" class="pure-button pure-button-primary">Submit</button>
+              </fieldset>
+          </form>
+      </div>
+    {% else %}
+      Log in to get started!
     {% endif %}
+    <h1>Rooms:</h1>
+    <ul id="room_list" class="pure-menu-list">
+      {% for room in rooms %}
+        <li class="pure-menu-item"><a href="{{ url_for('room_view', r_id=room.id) }}"
+                                      class="pure-menu-link">{{ room.topic }}</a></li>
+      {% endfor %}
+    </ul>
 {% endblock %}

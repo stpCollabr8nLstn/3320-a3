@@ -26,13 +26,14 @@ def setup_user():
 
 @app.route('/')
 def index():
-    return flask.render_template('index.html', csrf_token=flask.session['csrf_token'])
+    rooms = models.Room.query.order_by(models.Room.topic).limit(20).all()
+    return flask.render_template('index.html', csrf_token=flask.session['csrf_token'], rooms=rooms)
 
 
 @app.route('/user/<int:uid>')
 def show_user(uid):
     user = models.User.query.get_or_404(uid)
-    return flask.render_template('user.html', user=user)
+    return flask.render_template('profile.html', user=user)
 
 
 @app.route('/logout')

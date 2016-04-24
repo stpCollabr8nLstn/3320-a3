@@ -1,6 +1,6 @@
 import flask
+from flask_socketio import join_room, send
 import flask_socketio as sio
-
 from init import app, db, socketio
 import models
 
@@ -17,19 +17,6 @@ def check_request():
         flask.abort(403)
 
 
-@app.route('/msg/send', methods=['POST'])
-def handle_send():
-    check_request()
-    init = flask.g.user.id
-    other = int(flask.request.form['recipient_id'])
-    msg = send_message(init, other)
-    # notify the recipient of the hai
-    # emit an event of type 'hai', with msg content, to all connections
-    # in the recipient's room
-    socketio.emit('hai', msg.jsonable, room='user-{}'.format(other))
-    return flask.jsonify(msg.jsonable)
-
-
 @socketio.on('connect')
 def on_connect():
     # get the connecting user's user ID
@@ -44,6 +31,7 @@ def on_connect():
     # add this connection to the user's 'room', so we can send to all
     # the user's open browser tabs
     join_room('user-{}'.format(uid))
+
 
 @socketio.on('disconnect')
 def on_disconnect():

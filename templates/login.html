@@ -3,17 +3,17 @@
 {% block content %}
     <br><br>
     {% if state == 'bad' %}
-    <p class="error">Invalid user name or password.</p>
+      <p class="error">Invalid user name or password.</p>
     {% elif state == 'bad-username' %}
-      <p class="error">Invalid username.</p>
+        <p class="error">Invalid username.</p>
     {% elif state == 'password-mismatch' %}
-      <p class="error">Passwords don't match.</p>
+        <p class="error">Passwords don't match.</p>
     {% elif state == 'username-used' %}
-      <p class="error">Username already taken.</p>
+        <p class="error">Username already taken.</p>
     {% endif %}
 
     <div class="login-page pure-u-1 pure-u-md-1">
-        <form method="POST" action="{{ url_for("login") }}" class="pure-form pure-form-stacked pure-u-1 pure-u-md-1-3">
+        <form method="POST" action="{{ url_for("handle_username") }}" class="pure-form pure-form-stacked pure-u-1 pure-u-md-1-3">
             <h2>Returning Users</h2>
             <input type="hidden" name="url" value="{{ request.args.url }}">
 
