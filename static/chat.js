@@ -43,7 +43,18 @@ socket.on('message', function(msg) {
     scrollChat();
 });
 
+$('.get-display').on('submit', function(event) {
+    event.preventDefault();
+    var dis_name = $('#display').val();
+    $('.chat').show();
+    $('.chat-users').show();
+    $('.get-display').hide();
+    $('#userlist').append($('<li>').addClass('user fa fa-user').text("     " + dis_name));
+});
+
+
 $(window).load(function() {
-    var u_name = $('#uname').val();
-    $('#userlist').append($('<li>').addClass('user fa fa-user').text('     ' + u_name));
+    $('.chat').hide();
+    $('.chat-users').hide();
+    socket.on($('room-id'));
 });

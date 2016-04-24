@@ -1,5 +1,5 @@
 import flask
-from flask_socketio import join_room, send
+from flask_socketio import join_room, leave_room, send, emit
 import flask_socketio as sio
 from init import app, db, socketio
 import models
@@ -17,6 +17,18 @@ def check_request():
         flask.abort(403)
 
 
+@socketio.on('message')
+def message(msg):
+    # since this is a 'message' event, msg is a string
+    # if it were on event 'json', it would be json
+
+    # get response from eliza
+    #response = chat.respond(msg)
+    # send it to client
+    # flask_socketio.send sends a message to whatever client called us
+    send(msg, broadcast=True)
+
+
 @socketio.on('connect')
 def on_connect():
     # get the connecting user's user ID
@@ -27,7 +39,7 @@ def on_connect():
         return
 
     app.logger.info('new client connected for user %d', uid)
-
+    user = models.User.query.get_or_404(uid)
     # add this connection to the user's 'room', so we can send to all
     # the user's open browser tabs
     join_room('user-{}'.format(uid))
