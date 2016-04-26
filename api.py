@@ -17,15 +17,10 @@ def check_request():
         flask.abort(403)
 
 
+
 @socketio.on('message')
 def message(msg):
-    # since this is a 'message' event, msg is a string
-    # if it were on event 'json', it would be json
 
-    # get response from eliza
-    #response = chat.respond(msg)
-    # send it to client
-    # flask_socketio.send sends a message to whatever client called us
     send(msg, broadcast=True)
 
 

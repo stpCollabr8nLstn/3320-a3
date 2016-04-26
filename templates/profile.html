@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}{{ user.username }}{% endblock %}
 {% block content %}
+  <div class="pure-u-1" id="profile-container">
+  <img class="user-avatar" src="https://www.gravatar.com/avatar/{{ user.grav_hash }}">
   <h1>{{ user.username }}</h1>
   {{ user.email }}
+  </div>
 {% endblock %}

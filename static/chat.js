@@ -19,6 +19,7 @@ $('#chat').on('submit', function(event) {
     event.preventDefault();
     // get the message - it's the value of the message element
     var msg = $('#m').val();
+    var dis_name = $('#display').val();
     // send the message to the server
     socket.send(msg);
     // reset the message input
@@ -32,7 +33,7 @@ $('#chat').on('submit', function(event) {
        2. adding 'sent' to its 'class' attribute
        3. setting its text to the message content
      */
-    $('#messages').append($('<li>').addClass('sent').text(msg));
+    $('#messages').append($('<li>').addClass('sent').text(dis_name + ": " + msg));
     scrollChat();
 });
 
@@ -41,6 +42,7 @@ socket.on('message', function(msg) {
     // add it to the list!
     $('#messages').append($('<li>').addClass('received').text(msg));
     scrollChat();
+    console.log("in message");
 });
 
 $('.get-display').on('submit', function(event) {
